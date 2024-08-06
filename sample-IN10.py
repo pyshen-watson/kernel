@@ -54,8 +54,8 @@ def sampling(root: Path, n_sample: int, transform):
         label_list.extend(labels)
 
     return {
-        "IN10_image": np.stack(image_list, axis=0),
-        "IN10_label": np.stack(label_list, axis=0),
+        "image": np.stack(image_list, axis=0),
+        "label": np.stack(label_list, axis=0),
     }
 
 def save_result(result: dict):

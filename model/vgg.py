@@ -7,13 +7,13 @@ def VGGBlock(out_ch, num_conv):
     layers += [Base.avgPool()]
     return Base.serial(layers)
 
-def VGG(width_Base=32, level=2, pooling=3, n_class=10):
+def VGG(width_Base=32, level=2, group=3, n_class=10):
     
     layers = []
     out_ch = width_Base
 
     # Convolutional backbone
-    for _ in range(pooling):
+    for _ in range(group):
         layers += [VGGBlock(out_ch, level)]
         out_ch *= 2
 

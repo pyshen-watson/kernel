@@ -24,7 +24,7 @@ class Base:
         )
 
     @staticmethod
-    def dense(out_dim, W_std=1.0, b_std=0.0, parameterization="ntk"):
+    def dense(out_dim, W_std=2.0**0.5, b_std=0.1, parameterization="ntk"):
         return stax.Dense(
             out_dim, W_std=W_std, b_std=b_std, parameterization=parameterization
         )
@@ -48,15 +48,11 @@ class Base:
     @staticmethod
     def serial(layers):
         return stax.serial(*layers)
-    
+
     @staticmethod
     def identity():
         return stax.Identity()
-    
+
     @staticmethod
     def twoBranch(br1, br2):
-        return stax.serial(
-            stax.FanOut(2), 
-            stax.parallel(br1, br2), 
-            stax.FanInSum()
-        )
+        return stax.serial(stax.FanOut(2), stax.parallel(br1, br2), stax.FanInSum())

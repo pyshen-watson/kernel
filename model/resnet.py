@@ -23,11 +23,11 @@ def ResnetGroup(n, out_ch):
     return Base.serial(layers)
 
 
-def Resnet(width_base=32, level=1, pooling=1, n_class=10):
+def Resnet(width_base=32, level=1, group=1, n_class=10):
 
     layers = [Base.conv(width_base, 7, 2), Base.avgPool(ksize=3)]
 
-    for _ in range(pooling - 1):
+    for _ in range(group):
         layers += [ResnetGroup(level, width_base)]
         width_base *= 2
 
